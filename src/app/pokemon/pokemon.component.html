@@ -1,0 +1,41 @@
+<div *ngIf="isConfirmed" class="role">
+    <li class="card">
+        <div class="img-area">
+            <img [src]="selected.img" />
+        </div>
+        <h3 class="name">{{ selected.name }}</h3>
+        <h4>#{{ selected.id }}</h4>
+        <div class="info">
+            <p>Weight: {{ selected.weight }}</p>
+            <p>Height: {{ selected.height }}</p>
+            <li *ngFor="let type of selected.type">{{ type }}</li>
+        </div>
+    </li>
+</div>
+
+
+<ul *ngIf="!isConfirmed ">
+    <li *ngFor="let card of pokeService.starterlist$ | async" class="card" (click)="showPrompt(card.name)">
+        <div class="img-area">
+            <img [src]="card.img" />
+        </div>
+
+        <h3 class="name">{{ card.name }}</h3>
+        <h4>#{{ card.id }}</h4>
+        <div class="info">
+            <p>Weight: {{ card.weight }}</p>
+            <p>Height: {{ card.height }}</p>
+            <li *ngFor="let type of card.type">{{ type }}</li>
+        </div>
+    </li>
+</ul>
+
+<div *ngIf="isClick" class="selected">
+    <div class="alert">
+        <h3>Do you want to select this pokemon?</h3>
+        <div class="button-area">
+            <button class="cancel" (click)="cancel()">Cancel</button>
+            <button class="confirm" (click)="confirm()">Confirm</button>
+        </div>
+    </div>
+</div>
